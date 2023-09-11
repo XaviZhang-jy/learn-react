@@ -1,6 +1,6 @@
 import './index.less';
 import { Typography } from '@kdcloudjs/kdesign'
-import SystemTabs from './tabs';
+import RuleTabs from './tabs';
 const { Text } = Typography
 
 export default function Rule() {
@@ -8,7 +8,7 @@ export default function Rule() {
         <div className="rule">
             <Text className='system-title'>灵活丰富的典型页面规则</Text>
             <Text style={{display:'block',fontSize:'16px'}} type="assist">助力高品质平台开发</Text>
-            <SystemTabs></SystemTabs>
+            <RuleTabs></RuleTabs>
         </div>
     );
 };

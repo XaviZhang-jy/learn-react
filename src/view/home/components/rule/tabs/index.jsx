@@ -5,7 +5,7 @@ import Tab1 from './tabItem1';
 import Tab2 from './tabItem2';
 
 
-export default function SystemTabs() {
+export default function RuleTabs() {
     const [curKey, setCurKey] = React.useState(1)
 
     const tabStyle = {

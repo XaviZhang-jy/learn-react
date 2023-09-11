@@ -9,9 +9,8 @@ export default function DetailWithDownloadArrow(props) {
     return (
         <div className={`detail ${hovered ? 'hovered' : ''}`}
             onMouseEnter={() => {
-                if(props.title==='设计资源'){
-                setHovered(true);
-            }}}
+                setHovered(props.title==='设计资源');
+            }}
             onMouseLeave={() => setHovered(false)}>
             <img src={props.img} alt="icon" />
             {props.text}

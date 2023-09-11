@@ -48,8 +48,8 @@ const Navbar = () => {
     return (
         <React.Fragment>
             <div className="navbar" style={style}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
                 <div className="navbar-Logo" style={logoStyle}></div>
 

@@ -1,14 +1,23 @@
 import React from 'react';
 import './index.less';
-import { Me } from "@kdcloudjs/kdesign-icons";
 import NavbarSearch from "./search";
-
-const navTitles = ['首页', '全局规则', '设计规范', '开发', '资源'];
+// @ts-ignore
+import {Me} from "@kdcloudjs/kdesign-icons"
+import axios from 'axios';
+import '../../../../mock/navbar'
 
 const Navbar = () => {
+  
+  React.useEffect(() => {
+    axios.get('mock/navTitles').then(res =>{
+      setNavTitles(res.data.navTitles);
+    })
+  }, []);
 
-  const [isAtTop, setIsAtTop] = React.useState(true);
-  const [hovered, setHovered] = React.useState(false);
+
+  const [navTitles, setNavTitles] = React.useState<Array<string>>([]);
+  const [isAtTop, setIsAtTop] = React.useState<boolean>(true);
+  const [hovered, setHovered] = React.useState<boolean>(false);
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -22,17 +31,17 @@ const Navbar = () => {
     setIsAtTop(scrollTop === 0);
   };
 
-  const style =  {
+  const style:React.CSSProperties =  {
     background : isAtTop&&!hovered ? 'transparent': 'white',
     boxShadow:  isAtTop&&!hovered ? "none" : "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
   }
-  const textStyle ={
+  const textStyle:React.CSSProperties ={
     color: isAtTop&&!hovered ? "white" : "black",
   }
-  const logoStyle={
+  const logoStyle:React.CSSProperties={
     backgroundImage: isAtTop&&!hovered ? 'url(https://kingdee.design/theme/kui_white.svg)':'url(https://kingdee.design/theme/kui.svg)',
   }
-  const MeStyle={
+  const MeStyle:React.CSSProperties={
         fill: isAtTop&&!hovered ? '#fff' : 'black',
   }
 
@@ -43,7 +52,6 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 
     return (
         <React.Fragment>

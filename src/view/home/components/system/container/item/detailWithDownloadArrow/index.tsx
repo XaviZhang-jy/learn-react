@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './index.less';
 import DownloadArrow from '../download';
 
-export default function DetailWithDownloadArrow(props) {
+export default function DetailWithDownloadArrow(props:any) {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -14,7 +14,7 @@ export default function DetailWithDownloadArrow(props) {
             onMouseLeave={() => setHovered(false)}>
             <img src={props.img} alt="icon" />
             {props.text}
-            {hovered && <DownloadArrow className="download-arrow" />}
+            {hovered && <DownloadArrow/>}
         </div>
     );
 }

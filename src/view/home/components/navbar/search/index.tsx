@@ -1,12 +1,15 @@
 import React from 'react'
 import { Search } from '@kdcloudjs/kdesign'
 import './index.less';
-
-export default function Demo(props) {
-  const handlePressEnter = (value) => {
+interface searchbarParams{
+  isAtTop:boolean;
+  hovered:boolean;
+}
+export default function NavbarSearch(props:searchbarParams) {
+  const handlePressEnter = (value:any) => {
     console.log(value)
   }
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     console.log(e)
   }
 

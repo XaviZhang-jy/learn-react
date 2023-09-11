@@ -1,3 +1,4 @@
+import React from 'react';
 import './index.less';
 import { Typography } from '@kdcloudjs/kdesign'
 import RuleTabs from './tabs';

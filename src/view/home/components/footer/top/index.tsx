@@ -2,6 +2,7 @@ import FooterLogo from "./logo";
 import FooterMain from "./main";
 import { Image } from '@kdcloudjs/kdesign'
 import './index.less';
+import React from 'react';
 
 
 export default function FooterTop(){

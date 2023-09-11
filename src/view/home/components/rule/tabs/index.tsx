@@ -13,7 +13,7 @@ export default function RuleTabs() {
         height: '108px',
     }
 
-    const change = (id) => {
+    const change = (id:any) => {
         setCurKey(id);
         console.log('curKey:' + curKey);
     }

@@ -1,6 +1,7 @@
 import { Typography } from '@kdcloudjs/kdesign'
 import './index.less';
 import ItemContainer from './container';
+import React from 'react';
 
 const { Text } = Typography
 

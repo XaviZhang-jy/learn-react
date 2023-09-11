@@ -1,12 +1,12 @@
 import React from "react";
 import { Carousel } from "@kdcloudjs/kdesign";
 import "./index.less";
-
+import axios from 'axios';
+import '../../../../mock/banner'
 export default function Banner() {
 
-    const carouselRef = React.useRef();
-    const [isHovered, setIsHovered] = React.useState(false);
-
+    const [isHovered, setIsHovered] = React.useState<boolean>(false);
+    const [bannerPicture,setbannerPicture] = React.useState<Array<string>>([]);
 
     const handleMouseEnter = () => {
       setIsHovered(true);
@@ -17,18 +17,19 @@ export default function Banner() {
       setIsHovered(false);
     };
 
-    const bannerPicture = [
-        'https://kui.kingdee.com/kd/api/static/banner/product/ea09dfdb6b73f2f90732516a7636437f.svg',
-        'https://kui.kingdee.com/kd/api/static/banner/product/ea09dfdb6b73f2f90732516a7636437f.svg',
-        'https://kui.kingdee.com/kd/api/static/banner/product/7ee6766e03bbb6e2fdacec19da6d8e8b.svg'
-    ]
+    React.useEffect(() => {
+        axios.get('mock/bannerPicture').then(res =>{
+            setbannerPicture(res.data.bannerPicture);
+        })
+      }, []);
+
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: '332px'}}
-        onMouseEnter={handleMouseEnter} // 添加 onMouseEnter 事件处理程序
-        onMouseLeave={handleMouseLeave} // 添加 onMouseLeave 事件处理程序
+        onMouseEnter={handleMouseEnter} 
+        onMouseLeave={handleMouseLeave} 
         >
-            <Carousel name="Carousel" ref={carouselRef} dots={isHovered} autoplay={true} jumpNode={isHovered}>
+            <Carousel className="Carousel"  dots={isHovered} autoplay={true} jumpNode={isHovered}>
                 {bannerPicture
                     .map((picture, i) => {
                         return (

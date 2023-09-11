@@ -2,6 +2,7 @@
 // 修改默认配置
 const CracoLessPlugin = require('craco-less');
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   babel: {
@@ -15,6 +16,15 @@ module.exports = {
         // 配置 webpack 插件
       }),
     ],
+    configure: (webpackConfig, { env, paths }) => {
+      // 添加路径别名配置
+      webpackConfig.resolve.alias = {
+        ...webpackConfig.resolve.alias,
+        '@': path.resolve(__dirname, 'src'), // 将 @ 映射到项目的 'src' 目录
+      };
+
+      return webpackConfig;
+    },
   },
   plugins: [
     {

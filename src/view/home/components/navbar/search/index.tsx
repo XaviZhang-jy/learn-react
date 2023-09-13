@@ -1,15 +1,29 @@
 import React from 'react'
 import { Search } from '@kdcloudjs/kdesign'
 import './index.less';
+import axios from 'axios';
+import '../../../../../mock/navbar';
+
 interface searchbarParams{
   isAtTop:boolean;
   hovered:boolean;
 }
 export default function NavbarSearch(props:searchbarParams) {
-  const handlePressEnter = (value:any) => {
+
+  const [version,setVersion] = React.useState<string>();
+
+  React.useEffect(() => {
+    axios.get('mock/version').then(res => {
+      setVersion(res.data.version);
+    }).catch(error => {
+      console.error(error);
+    });
+  }, []);
+
+  const handlePressEnter = (value:any) : void => {
     console.log(value)
   }
-  const handleChange = (e:any) => {
+  const handleChange = (e:any) : void => {
     console.log(e)
   }
 
@@ -21,7 +35,7 @@ export default function NavbarSearch(props:searchbarParams) {
   return (
     <div className='search-bar'>
       <Search className='search-bar-main' prefix onSearch={handleChange} onPressEnter={handlePressEnter} borderType='bordered' placeholder='搜索您感兴趣的内容'/>
-      <div className="version" style={versionStyle}>v 2.0.0</div>
+      <div className="version" style={versionStyle}>{version}</div>
     </div>
   )
 }

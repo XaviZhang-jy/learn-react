@@ -14,7 +14,9 @@ export default function FooterMain(){
     React.useEffect(()=>{
         axios.get('mock/footerMain/data').then(res=>{
             setData(res.data.footerMainData);
-        })
+        }).catch(error => {
+            console.error(error);
+        });
     },[])
 
     return(

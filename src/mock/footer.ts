@@ -1,5 +1,6 @@
 import Mock from "mockjs"
-const footerMock = Mock.mock("mock/footerMain/data","get",{
+Mock.mock("mock/footerMain/data","get",()=>{
+  return{
   success: true,
   "footerMainData": [
     {id:'1',url:'https://www.kingdee.com/',content:'金蝶官网'},
@@ -8,4 +9,5 @@ const footerMock = Mock.mock("mock/footerMain/data","get",{
     {id:'4',url:'https://vip.kingdee.com/school',content:'金蝶学习与成长中心'},
     {id:'5',url:'https://kingdee.design/footer/page/protocol',content:'用户协议'},
     {id:'6',url:'https://account.kdcloud.com/privacy?id=3515729708820185088',content:'金蝶中国隐私政策'}]
+  }
 });

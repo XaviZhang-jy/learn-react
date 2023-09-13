@@ -8,19 +8,21 @@ export default function Banner() {
     const [isHovered, setIsHovered] = React.useState<boolean>(false);
     const [bannerPicture,setbannerPicture] = React.useState<Array<string>>([]);
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = () : void => {
       setIsHovered(true);
     };
   
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = () : void => {
       setIsHovered(false);
     };
 
     React.useEffect(() => {
         axios.get('mock/bannerPicture').then(res =>{
             setbannerPicture(res.data.bannerPicture);
-        })
+        }).catch(error => {
+            console.error(error);
+        });
       }, []);
 
 

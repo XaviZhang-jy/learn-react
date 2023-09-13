@@ -3,20 +3,45 @@ import { Tabs } from '@kdcloudjs/kdesign'
 import './index.less';
 import Tab1 from './tabItem1';
 import Tab2 from './tabItem2';
-
+import axios from 'axios';
+import '../../../../../mock/rule';
 
 export default function RuleTabs() {
+
+    React.useEffect(() => {
+        axios.get('mock/ruleData').then(res => {
+            setMainData(res.data.ruleData);
+        }).catch(error => {
+            console.error(error);
+        });
+      }, []);
+
+    interface ruleData{
+        title: string;
+        changeUrl: string;
+        changeText: string;
+        rulePicture: string;
+    }
+
     const [curKey, setCurKey] = React.useState(1)
+
+    const [mainData,setMainData] = React.useState<Array<ruleData>>([]);
 
     const tabStyle = {
         width: '720px',
         height: '108px',
     }
 
-    const change = (id:any) => {
+    const change = (id:any) : void => {
         setCurKey(id);
         console.log('curKey:' + curKey);
     }
+
+      /**
+       * TODO:
+       * 有个bug，似乎是对于useEffect的异步理解不对导致的问题。通过使用：{mainData[0] ? mainData[0].title : 'Loading...'} 解决问题。
+       * 思考下其他地方为什么没出现问题。
+       */
 
     return (
         <>
@@ -25,26 +50,50 @@ export default function RuleTabs() {
                     <Tabs.TabPane className='tabs-nav' key={1} tab={<Tab1 number={curKey}/>}>
                         <div>
                             <div className="page-title">
-                                <span>各种页面视觉标注,一键查看</span>
-                                <a href="https://kingdee.design/pc/page/workbench/workbench" target="">查看所有页面标注</a>
+                                <span>{mainData[0] ? mainData[0].title : 'Loading...'}</span>
+                                <a href={mainData[0] ? mainData[0].changeUrl : 'Loading...'} target="">{mainData[0] ? mainData[0].changeText : 'Loading...'}</a>
                             </div>
                             <div className="preview-image">
-                                <img src="https://kingdee.design/static/rule-info-image.ab588246.svg" alt="视觉标注" />
+                                <img src={mainData[0] ? mainData[0].rulePicture : 'Loading...'} alt="视觉标注" />
                             </div>
                         </div>
                     </Tabs.TabPane>
                     <Tabs.TabPane className='tabs-nav' key={2} tab={<Tab2 number={curKey}/>} >
                         <div> 
                             <div className="page-title">
-                                <span>基于 React 的高代码实现，开源共享</span>
-                                <a href="https://pro.kingdee.design/" target="">查看 KDesign React Pro</a>
+                                <span>{mainData[1] ? mainData[1].title : 'Loading...'}</span>
+                                <a href={mainData[1] ? mainData[1].changeUrl : 'Loading...'} target="">{mainData[1] ? mainData[1].changeText : 'Loading...'}</a>
                             </div>
                             <div className="preview-image">
-                                <img src="https://kingdee.design/static/rule-develop-image.e014d5b4.svg" alt="搞代码开发" />
+                                <img src={mainData[1] ? mainData[1].rulePicture : 'Loading...'} alt="高代码开发" />
                             </div>
                         </div>
                     </Tabs.TabPane>
                 </Tabs>
+                                {/* <Tabs effect="fade" className='container-tabs' style={tabStyle} activeKey={curKey} onChange={change}>
+                    <Tabs.TabPane className='tabs-nav' key={1} tab={<Tab1 number={curKey}/>}>
+                        <div>
+                            <div className="page-title">
+                                <span>{mainData[0].title}</span>
+                                <a href={mainData[0].changeUrl} target="">{mainData[0].changeText}</a>
+                            </div>
+                            <div className="preview-image">
+                                <img src={ mainData[0].rulePicture} alt="视觉标注" />
+                            </div>
+                        </div>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane className='tabs-nav' key={2} tab={<Tab2 number={curKey}/>} >
+                        <div> 
+                            <div className="page-title">
+                                <span>{mainData[1].title}</span>
+                                <a href={mainData[1].changeUrl} target="">{mainData[1].changeText}</a>
+                            </div>
+                            <div className="preview-image">
+                                <img src={mainData[1].rulePicture} alt="高代码开发" />
+                            </div>
+                        </div>
+                    </Tabs.TabPane>
+                </Tabs> */}
             </div>
         </>
     )

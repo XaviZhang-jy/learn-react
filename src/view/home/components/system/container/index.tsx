@@ -24,7 +24,9 @@ export default function ItemContainer() {
   React.useEffect(() => {
     axios.get('mock/itemProps').then(res => {
       setItemProps(res.data.itemProps);
-    })
+    }).catch(error => {
+      console.error(error);
+  });
   }, [])
   return (
     <div className="contain">
